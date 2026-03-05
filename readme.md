@@ -2,7 +2,7 @@
 
 [![GitHub](https://img.shields.io/badge/GitHub-prateek959/saas--chatbot--builder-blue?logo=github&style=flat-square)](https://github.com/prateek959/saas-chatbot-builder)
 [![Backend Deployment](https://img.shields.io/badge/Backend-Railway-blue?logo=railway&style=flat-square)](https://saas-chatbot-builder-production.up.railway.app)
-[![Frontend Deployment](https://img.shields.io/badge/Frontend-Coming%20Soon-red?style=flat-square)](#)
+[![Frontend Deployment](https://img.shields.io/badge/Frontend-Vercel-green?logo=vercel&style=flat-square)](https://saas-chatbot-builder.vercel.app)
 
 A powerful, modern SaaS platform for building AI-powered chatbots without any coding. Upload your documents, create intelligent chatbots powered by Google Gemini AI, and embed them anywhere on the web.
 
@@ -327,7 +327,6 @@ Conversation Logging
 2. **Queue Processing**: Background job processing with cron jobs
 3. **Batch Embeddings**: Efficient batch processing of document chunks
 4. **Vector Search**: Fast cosine similarity calculations
-5. **Database Indexing**: Optimized MongoDB queries
 
 ---
 
@@ -345,7 +344,7 @@ The backend is deployed on Railway.app at: `https://saas-chatbot-builder-product
 
 ### Frontend Deployment
 
-**Coming Soon** - The frontend deployment link will be available here.
+The frontend is deployed on Vercel at: `https://saas-chatbot-builder.vercel.app`
 
 **Deployment Options:**
 - Vercel
@@ -404,7 +403,6 @@ We welcome contributions! Please feel free to:
 ## 🐛 Known Limitations & Future Improvements
 
 ### Current Limitations
-- Frontend deployment currently unavailable
 - Document size limited to processing capacity
 - Single language support (English)
 
