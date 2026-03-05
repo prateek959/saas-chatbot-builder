@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const CreateBot = () => {
+   const API_LOC = "http://localhost:5004";
+  const API_DEV = "https://saas-chatbot-builder-production.up.railway.app";
   const [chatbotName, setChatbotName] = useState("");
   const [file, setFile] = useState(null);
   const [status, setStatus] = useState("");
@@ -19,7 +21,7 @@ const CreateBot = () => {
     const fetchBot = async () => {
       setLoadingBot(true);
       try {
-        const res = await axios.get("http://localhost:5004/bot/script", {
+        const res = await axios.get(`${API_DEV}/bot/script`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -62,7 +64,7 @@ const CreateBot = () => {
       setLoading(true);
 
       const res = await axios.post(
-        "http://localhost:5004/bot/upload",
+        `${API_DEV}/bot/upload`,
         formData,
         {
           headers: {

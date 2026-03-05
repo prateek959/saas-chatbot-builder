@@ -3,6 +3,8 @@ import { Link, useNavigate, Navigate } from "react-router-dom";
 import axios from "axios";
 
 const Login = () => {
+  const API_LOC = "http://localhost:5004";
+  const API_DEV = "https://saas-chatbot-builder-production.up.railway.app";
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
@@ -24,7 +26,7 @@ const Login = () => {
     e.preventDefault();
     setError("");
     try {
-      const res = await axios.post("http://localhost:5004/user/login", formData);
+      const res = await axios.post(`${API_DEV}/user/login`, formData);
       localStorage.setItem("token", res.data.token);
       navigate("/dashboard");
     } catch (err) {

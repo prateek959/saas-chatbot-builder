@@ -3,6 +3,8 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 const TestBot = () => {
+   const API_LOC = "http://localhost:5004";
+  const API_DEV = "https://saas-chatbot-builder-production.up.railway.app";
   const [question, setQuestion] = useState("");
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -25,7 +27,7 @@ const TestBot = () => {
   useEffect(() => {
     const checkBotStatus = async () => {
       try {
-        const res = await axios.get("http://localhost:5004/bot/script", {
+        const res = await axios.get(`${API_DEV}/bot/script`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -54,7 +56,7 @@ const TestBot = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:5004/bot/test",
+        `${API_DEV}/bot/test`,
         { question: userMessage, sessionID },
         {
           headers: { Authorization: `Bearer ${token}` },
