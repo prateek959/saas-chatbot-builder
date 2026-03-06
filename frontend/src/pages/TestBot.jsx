@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 const TestBot = () => {
    const API_LOC = "http://localhost:5004";
   const API_DEV = "https://saas-chatbot-builder-production.up.railway.app";
+  const API = API_DEV;
   const [question, setQuestion] = useState("");
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -27,7 +28,7 @@ const TestBot = () => {
   useEffect(() => {
     const checkBotStatus = async () => {
       try {
-        const res = await axios.get(`${API_DEV}/bot/script`, {
+        const res = await axios.get(`${API}/bot/script`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -56,7 +57,7 @@ const TestBot = () => {
 
     try {
       const res = await axios.post(
-        `${API_DEV}/bot/test`,
+        `${API}/bot/test`,
         { question: userMessage, sessionID },
         {
           headers: { Authorization: `Bearer ${token}` },

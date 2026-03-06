@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 const GetScript = () => {
    const API_LOC = "http://localhost:5004";
   const API_DEV = "https://saas-chatbot-builder-production.up.railway.app";
+  const API = API_DEV;
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
   const [script, setScript] = useState("");
@@ -20,7 +21,7 @@ const GetScript = () => {
       setLoading(true);
 
       try {
-        const res = await axios.get(`${API_DEV}/bot/script`, {
+        const res = await axios.get(`${API}/bot/script`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

@@ -5,6 +5,7 @@ import axios from "axios";
 const Login = () => {
   const API_LOC = "http://localhost:5004";
   const API_DEV = "https://saas-chatbot-builder-production.up.railway.app";
+  const API = API_DEV;
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
@@ -26,7 +27,7 @@ const Login = () => {
     e.preventDefault();
     setError("");
     try {
-      const res = await axios.post(`${API_DEV}/user/login`, formData);
+      const res = await axios.post(`${API}/user/login`, formData);
       localStorage.setItem("token", res.data.token);
       navigate("/dashboard");
     } catch (err) {

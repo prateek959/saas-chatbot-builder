@@ -3,6 +3,7 @@ import Chunk from "../models/chunk.model.js";
 import Queue from "../models/queue.schema.js";
 import generateEmbeddingBatch from "../service/gemini.embedding.js";
 import extractText from "../utils/resumeparser.js";
+import fs from 'fs/promises';
 
 
 const docUpload = async (req, res) => {
@@ -12,11 +13,12 @@ const docUpload = async (req, res) => {
         const text = await extractText(req.file.path, req.file.mimetype);
 
         if (!text) {
+            await fs.unlink(req.file.path).catch(() => { });
             return res.status(400).json({
                 message: "Unable to read the document. Please upload a valid file.",
             });
         };
-
+        await fs.unlink(req.file.path).catch(() => { });
         const bot = await Bot.create({
             userID: req.user.id,
             name: chatbotName,
@@ -68,13 +70,13 @@ const docUpload = async (req, res) => {
             const texts = pendingChunks.map((c) => c.text);
             const vectors = await generateEmbeddingBatch(texts);
             // console.log(vectors);
-            for(let i=0; i<pendingChunks.length; i++){
+            for (let i = 0; i < pendingChunks.length; i++) {
                 await Chunk.updateOne(
-                    {chatbotID:pendingChunks[i].chatbotID},
-                    {embedding:vectors[i],status:"Done"}
+                    { chatbotID: pendingChunks[i].chatbotID },
+                    { embedding: vectors[i], status: "Done" }
                 )
             }
-    
+
         } catch (aiError) {
 
             await Queue.create({
