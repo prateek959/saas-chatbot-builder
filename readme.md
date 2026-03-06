@@ -80,21 +80,21 @@ A powerful, modern SaaS platform for building AI-powered chatbots without any co
 ## 🛠️ Tech Stack
 
 ### Backend
-- **Runtime**: Node.js
-- **Framework**: Express.js
-- **Database**: MongoDB with Mongoose ODM
-- **Authentication**: JWT + Argon2
-- **AI/ML**: Google Gemini API (embeddings & responses)
-- **File Processing**: Multer, Mammoth (DOCX), pdf-parse
-- **Task Queue**: Node-Cron for background job processing
-- **API**: RESTful API
+- **Runtime**: Node.js (v16+)
+- **Framework**: Express.js v5.2.1
+- **Database**: MongoDB with Mongoose v9.2.0
+- **Authentication**: JWT v9.0.3 + Argon2 v0.44.0
+- **AI/ML**: Google Gemini API (@google/genai v1.41.0)
+- **File Processing**: Multer v2.0.2, Mammoth v1.11.0 (DOCX), pdf-parse v1.1.4
+- **Task Queue**: Node-Cron v4.2.1 for background job processing
+- **API**: RESTful API with CORS v2.8.6
 
 ### Frontend
-- **Framework**: React 19
-- **Build Tool**: Vite
-- **Styling**: Tailwind CSS
-- **Routing**: React Router v7
-- **HTTP Client**: Axios
+- **Framework**: React v19.2.0
+- **Build Tool**: Vite v7.2.4
+- **Styling**: Tailwind CSS v4.1.18
+- **Routing**: React Router DOM v7.13.0
+- **HTTP Client**: Axios v1.13.5
 - **Package Manager**: npm
 
 ### DevOps & Deployment
@@ -131,20 +131,27 @@ echo "PORT=3004" >> .env
 npm run dev
 ```
 
-### Frontend Setup
+### Full Application Setup
 
 ```bash
-# Navigate to frontend directory
-cd frontend
+# Clone the repository
+git clone https://github.com/prateek959/saas-chatbot-builder.git
+cd saas-chatbot-builder
 
-# Install dependencies
+# Backend Setup
+cd backend
 npm install
-
-# Start development server
+# Create .env file with required variables (see Configuration section)
 npm run dev
 
-# Build for production
-npm run build
+# Frontend Setup (in a new terminal)
+cd ../frontend
+npm install
+npm run dev
+
+# Access the application
+# Frontend: http://localhost:5173
+# Backend: http://localhost:3004
 ```
 
 ---
@@ -191,23 +198,66 @@ MongoDB collections are automatically created via Mongoose schemas:
 ## 📊 Project Architecture
 
 ```
-VectorChat AI
-├── Backend (Express.js)
-│   ├── Authentication & Authorization
-│   ├── Chatbot CRUD Operations
-│   ├── Document Processing Pipeline
-│   ├── Vector Embedding Generation
-│   ├── AI Response Generation
-│   ├── Conversation Management
-│   └── Queue Processing Worker
+VectorChat AI/
+├── backend/
+│   ├── config/
+│   │   └── connection.js          # Database connection
+│   ├── controllers/
+│   │   ├── auth.controller.js     # Authentication logic
+│   │   ├── bot.delete.controller.js
+│   │   ├── bot.response.controller.js
+│   │   ├── checkBot.controller.js
+│   │   ├── conversation.controller.js
+│   │   ├── docupload.controller.js
+│   │   └── getscript.controller.js
+│   ├── middleware/
+│   │   └── auth.middleware.js     # JWT authentication middleware
+│   ├── models/
+│   │   ├── chatbot.model.js       # Chatbot schema
+│   │   ├── chunk.model.js         # Document chunks schema
+│   │   ├── conversation.schema.js # Conversation schema
+│   │   ├── queue.schema.js        # Processing queue schema
+│   │   └── user.model.js          # User schema
+│   ├── public/
+│   │   └── widget.js              # Embeddable chat widget
+│   ├── routes/
+│   │   ├── auth.routes.js         # Authentication routes
+│   │   ├── bot.routes.js          # Chatbot management routes
+│   │   └── conversation.schema.js # Conversation routes (misnamed, should be .routes.js)
+│   ├── service/
+│   │   ├── gemini.embedding.js    # Vector embedding service
+│   │   └── gemini.service.js      # Gemini AI service
+│   ├── utils/
+│   │   ├── resumeparser.js        # Resume parsing utility
+│   │   └── upload.js              # File upload utility
+│   ├── workers/
+│   │   └── queue.worker.js        # Background job processor
+│   ├── server.js                  # Main server file
+│   ├── package.json
+│   └── .env                       # Environment variables
 │
-└── Frontend (React + Vite)
-    ├── User Authentication
-    ├── Dashboard & Bot Management
-    ├── Bot Creation Wizard
-    ├── Chat Testing Interface
-    ├── Code Generation
-    └── Responsive UI
+└── frontend/
+    ├── public/
+    ├── src/
+    │   ├── api/                   # API integration
+    │   ├── assets/                # Static assets
+    │   ├── auth/
+    │   │   ├── Login.jsx          # Login component
+    │   │   └── Signup.jsx         # Signup component
+    │   ├── components/
+    │   │   └── Sidebar.jsx        # Sidebar component
+    │   ├── pages/
+    │   │   ├── CreateBot.jsx      # Bot creation page
+    │   │   ├── Dashboard.jsx      # Main dashboard
+    │   │   ├── GetScript.jsx      # Widget code page
+    │   │   └── TestBot.jsx        # Bot testing interface
+    │   ├── App.jsx                # Main app component
+    │   ├── main.jsx               # App entry point
+    │   ├── App.css
+    │   └── index.css
+    ├── package.json
+    ├── vite.config.js
+    └── eslint.config.js
 ```
 
 ### Data Flow
@@ -224,27 +274,23 @@ Conversation Logging
 
 ## 🔌 API Endpoints
 
-### Authentication
+### Authentication (`/user`)
 - `POST /user/register` - User registration
 - `POST /user/login` - User login
-- `POST /user/logout` - User logout
 
-### Chatbot Management
-- `POST /bot/create` - Create new chatbot
-- `GET /bot/list` - Get all user bots
-- `GET /bot/:id` - Get bot details
-- `DELETE /bot/:id` - Delete chatbot
-- `POST /bot/query` - Send message to bot
+### Chatbot Management (`/bot`)
+- `POST /bot/upload` - Upload document for chatbot training
+- `POST /bot/test` - Test chatbot with a message
+- `GET /bot/script` - Get embedding script for chatbot
+- `POST /bot/ask` - Send message to chatbot (public endpoint)
+- `POST /bot/add` - Add additional training data to the chatbot
+- `DELETE /bot/delete` - Delete chatbot
 
-### Document Upload
-- `POST /bot/upload` - Upload document for chatbot
-
-### Conversations
-- `GET /conversation/:botId` - Get bot conversations
-- `GET /conversation/session/:sessionId` - Get session history
+### Conversations (`/conversation`)
+- `GET /conversation/history` - Get conversation history
 
 ### Widget
-- `GET /widget.js` - Get embeddable widget code
+- `GET /widget.js` - Get embeddable widget code (public)
 
 ---
 
@@ -400,7 +446,40 @@ We welcome contributions! Please feel free to:
 
 ---
 
-## 🐛 Known Limitations & Future Improvements
+## � Troubleshooting
+
+### Common Issues
+
+**Backend Connection Issues:**
+- Ensure MongoDB is running and connection string is correct
+- Check that all environment variables are set in `.env`
+- Verify Google Gemini API key is valid
+
+**Frontend Build Issues:**
+- Clear node_modules and reinstall: `rm -rf node_modules && npm install`
+- Check Node.js version (v16+ required)
+- Ensure backend is running on port 3004
+
+**Document Upload Problems:**
+- Check file size limits
+- Ensure supported formats (PDF, DOCX, TXT)
+- Verify upload directory permissions
+
+**Authentication Errors:**
+- Clear browser localStorage/cookies
+- Check JWT_SECRET consistency
+- Verify user credentials
+
+### Development Tips
+
+- Use `npm run dev` for auto-reload during development
+- Check browser console and server logs for errors
+- Test API endpoints with tools like Postman or curl
+- Monitor MongoDB for data consistency
+
+---
+
+## �🐛 Known Limitations & Future Improvements
 
 ### Current Limitations
 - Document size limited to processing capacity
