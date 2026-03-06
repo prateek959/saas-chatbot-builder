@@ -18,7 +18,7 @@ const docUpload = async (req, res) => {
                 message: "Unable to read the document. Please upload a valid file.",
             });
         };
-        await fs.unlink(req.file.path).catch(() => { });
+        // await fs.unlink(req.file.path).catch(() => { });
         const bot = await Bot.create({
             userID: req.user.id,
             name: chatbotName,
