@@ -501,7 +501,7 @@ We welcome contributions! Please feel free to:
 
 - **GitHub Issues**: [Report bugs and request features](https://github.com/prateek959/saas-chatbot-builder/issues)
 - **GitHub Repository**: [VectorChat AI](https://github.com/prateek959/saas-chatbot-builder)
-- **Backend API**: [https://saas-chatbot-builder-production.up.railway.app](https://saas-chatbot-builder-production.up.railway.app)
+- **Backend API**: [https://saas-chatbot-builder.onrender.com](https://saas-chatbot-builder.onrender.comp)
 
 ---
 
