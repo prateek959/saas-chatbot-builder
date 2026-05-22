@@ -5,7 +5,7 @@
 
   const script = document.currentScript;
   const BOT_ID = script.dataset.botId;
-  const API_URL = "https://saas-chatbot-builder-production.up.railway.app/bot/ask"; // change later
+  const API_URL = "https://saas-chatbot-builder.onrender.com/bot/ask"; // change later
 
   if (!BOT_ID) {
     console.error("Chatbot widget: Missing data-bot-id");
