@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const GetScript = () => {
    const API_LOC = "http://localhost:5004";
-  const API_DEV = "https://saas-chatbot-builder-production.up.railway.app";
+  const API_DEV = "https://saas-chatbot-builder.onrender.com";
   const API = API_DEV;
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState("");

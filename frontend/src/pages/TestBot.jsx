@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const TestBot = () => {
    const API_LOC = "http://localhost:5004";
-  const API_DEV = "https://saas-chatbot-builder-production.up.railway.app";
+  const API_DEV = "https://saas-chatbot-builder.onrender.com";
   const API = API_DEV;
   const [question, setQuestion] = useState("");
   const [messages, setMessages] = useState([]);

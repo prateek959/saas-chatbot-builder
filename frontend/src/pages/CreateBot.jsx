@@ -4,7 +4,7 @@ import axios from "axios";
 const CreateBot = () => {
 
   const API_LOC = "http://localhost:5004";
-  const API_DEV = "https://saas-chatbot-builder-production.up.railway.app";
+  const API_DEV = "https://saas-chatbot-builder.onrender.com";
 
   const API = API_DEV;
 
