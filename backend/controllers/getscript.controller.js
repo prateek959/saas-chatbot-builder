@@ -23,7 +23,7 @@ const getscript = async (req, res) => {
         }
 
         // const API = `http://localhost:5004/widget.js`;
-        const API = "https://saas-chatbot-builder-production.up.railway.app/widget.js";
+        const API = "https://saas-chatbot-builder.onrender.com/widget.js";
 
 
         return res.status(200).json({

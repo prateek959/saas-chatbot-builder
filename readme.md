@@ -1,7 +1,7 @@
 # 🤖 VectorChat AI - SaaS Chatbot Builder
 
 [![GitHub](https://img.shields.io/badge/GitHub-prateek959/saas--chatbot--builder-blue?logo=github&style=flat-square)](https://github.com/prateek959/saas-chatbot-builder)
-[![Backend Deployment](https://img.shields.io/badge/Backend-Railway-blue?logo=railway&style=flat-square)](https://saas-chatbot-builder-production.up.railway.app)
+[![Backend Deployment](https://img.shields.io/badge/Backend-Render-blue?logo=Render&style=flat-square)](https://saas-chatbot-builder.onrender.com)
 [![Frontend Deployment](https://img.shields.io/badge/Frontend-Vercel-green?logo=vercel&style=flat-square)](https://saas-chatbot-builder.vercel.app)
 
 A powerful, modern SaaS platform for building AI-powered chatbots without any coding. Upload your documents, create intelligent chatbots powered by Google Gemini AI, and embed them anywhere on the web.
@@ -98,7 +98,7 @@ A powerful, modern SaaS platform for building AI-powered chatbots without any co
 - **Package Manager**: npm
 
 ### DevOps & Deployment
-- **Backend Hosting**: Railway.app
+- **Backend Hosting**: render.com
 - **Version Control**: Git & GitHub
 - **Development**: Nodemon for auto-reload
 
@@ -378,15 +378,15 @@ Conversation Logging
 
 ## 🚢 Deployment
 
-### Backend Deployment (Railway)
+### Backend Deployment (Render)
 
-The backend is deployed on Railway.app at: `https://saas-chatbot-builder-production.up.railway.app`
+The backend is deployed on Render.com at: `https://saas-chatbot-builder.onrender.com`
 
 **Deployment Steps:**
 1. Push code to GitHub
-2. Connect Railway to GitHub repository
-3. Configure environment variables in Railway dashboard
-4. Railway automatically builds and deploys
+2. Connect Render to GitHub repository
+3. Configure environment variables in Render dashboard
+4. Render automatically builds and deploys
 
 ### Frontend Deployment
 
@@ -395,7 +395,7 @@ The frontend is deployed on Vercel at: `https://saas-chatbot-builder.vercel.app`
 **Deployment Options:**
 - Vercel
 - Netlify
-- Railway
+- Render
 - GitHub Pages
 - AWS S3 + CloudFront
 
@@ -421,7 +421,7 @@ The frontend is deployed on Vercel at: `https://saas-chatbot-builder.vercel.app`
 
 ```html
 <div id="vectorchat-widget"></div>
-<script src="https://saas-chatbot-builder-production.up.railway.app/widget.js" 
+<script src="https://saas-chatbot-builder.onrender.com/widget.js" 
         data-bot-id="YOUR_BOT_ID"
         data-api-key="YOUR_API_KEY"></script>
 ```
@@ -515,7 +515,7 @@ This project is licensed under the ISC License - see the LICENSE file for detail
 
 - Google Gemini API for powerful AI capabilities
 - MongoDB for reliable data storage
-- Railway.app for seamless deployment
+- Render.com for seamless deployment
 - React & Vite communities for excellent tools
 
 ---
